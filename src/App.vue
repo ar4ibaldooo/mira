@@ -1,14 +1,14 @@
 <template>
   <nav>
     <router-link to="/">Внести предложение</router-link> |
-    <router-link to="/notes">Список записей</router-link>
+    <router-link to="/notes">Список</router-link>
   </nav>
   <router-view/>
 </template>
 
 <style>
   #app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
+    font-family: 'Roboto Slab', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
@@ -61,35 +61,9 @@
 
     table-layout: auto;
   }
-  input[type=text], select, textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    resize: vertical;
-    margin:10px 0;
-  }
+.attention{
+  color: #c6273a;
+}
 
-  label {
-    padding: 12px 12px 12px 0;
-    display: inline-block;
-  }
 
-  input[type=text]:focus {
-    background-color: lightblue;
-  }
-  .add_button {
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin:10px 0;
-
-    background-color: rgba(51, 125, 247, 0.53);
-    border: none;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-  }
 </style>

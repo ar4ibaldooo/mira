@@ -2,9 +2,11 @@
     <div>
         <table class="table">
             <th>№</th>
-            <th>ФИО</th>
-            <th>З/П</th>
-            <th>Возраст</th>
+            <th>Имя</th>
+            <th>Телефон</th>
+            <th>Email</th>
+            <th>Сообщение</th>
+            <th>Категория</th>
             <th></th>
             <ItemApp
             v-for="(personalItem, i)  of personals"  :key="personalItem.id" personal_prop.sync="personalItem"

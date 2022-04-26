@@ -1,9 +1,9 @@
 <template>
     <div>
-        <h2>Список сотрудников</h2>
+        <h2>Список предложений и замечаний</h2>
         <hr>
-        <button v-if="addtable" class="add_button" @click="addPersonal"> Добавить сотрудника
-        </button>
+       <!-- <button v-if="addtable" class="add_button" @click="addPersonal"> Добавить запись
+        </button>-->
             <confirm-dialogue ref="confirmDialogue"></confirm-dialogue>
         <EditApp v-if="editable"
 
@@ -49,12 +49,12 @@
             }
         },
         mounted() {
-            axios.get('/api/v1/employees')
+            axios.get('http://10.66.66.58:80/test/api/notes')
                 .then(response => {
-                    this.personals = response.data.data
+                    this.personals = response.data
                     this.loading = false
                     this.addtable = true
-                    console.log(response.data.data)
+                    /*console.log(JSON.stringify(this.personals));*/
                 })
                 .catch(e => {
                     this.errors.push(e)
@@ -79,12 +79,12 @@
             async doDelete(id) {
                 const ok = await this.$refs.confirmDialogue.show({
                     title: '!!!',
-                    message: 'Вы действительно желаете удалить сотрудника?.',
+                    message: `Вы действительно желаете удалить запись ?`,
                     okButton: 'Удалить',
                 })
                 // If you throw an error, the method will terminate here unless you surround it wil try/catch
                 if (ok) {
-                    await axios.delete(`/api/v1/delete/${id}`)
+                    await axios.delete(`http://10.66.66.58:80/test/api/notes/${id}`)
                     this.editable = false
                     alert('Запись успешно удалена')
                     location.reload();
@@ -94,9 +94,11 @@
                 }
             },
             openPersonalItem(id) {
-                axios.get(`/api/v1/employee/${id}`)
+
+                axios.get(`http://10.66.66.58:80/test/api/notes/${id}`)
                     .then(response => {
-                        this.personalItemEdit = response.data.data
+                        console.log(response.data)
+                        this.personalItemEdit = response.data
                         this.loading = false
                         this.editable = true
                         console.log(response.data.data)
@@ -110,23 +112,58 @@
             editPersonal(personal) {
                 if (!this.add){
                     axios
-                        .put(`/api/v1/update/${personal.id}`,
-                            {value: personal})
+                        .patch(`http://10.66.66.58:80/test/api/notes/${personal.id}`,
+                            {
+                                name: personal.name,
+                                email: personal.email,
+                                phone: personal.phone,
+                                finger: personal.finger,
+                                category: personal.category,
+                                text: personal.text,
+                            })
                     this.editable = false
                     this.addtable = true
-                    console.log('edit',personal)
+                   /*console.log('edit aaaaaaaa',personal)*/
                     this.add = false
+                    location.reload();
                 }
                 else {
-                    axios.post("/api/v1/create", {value: personal})
+                    let bodyFormData = new FormData();
+                        bodyFormData.append('name', personal.name);
+                        bodyFormData.append('email', personal.email);
+                        bodyFormData.append('phone', personal.phone);
+                        bodyFormData.append('finger', personal.finger);
+                        bodyFormData.append('category', personal.category);
+                        bodyFormData.append('text', personal.text);
+
+                    axios({
+                        method: "post",
+                        url: "http://10.66.66.58:80/test/api/notes",
+                        data: bodyFormData,
+                        headers: { "Content-Type": "multipart/form-data" },
+                    })
+                        .then(function (response) {
+                            //handle success
+                            console.log(response);
+                        })
+                        .catch(function (response) {
+                            //handle error
+                            console.log(response);
+                        });
+
+
+
+
+
+/*                    axios.post(`http://10.66.66.58:80/test/api/notes`, { value: "personal.name" })
                         .then(response => {
                         })
                         .catch(e => {
                             this.errors.push(e)
                         })
-                    this.add = false
-                    console.log('add',personal)
-                    location.reload();
+                    this.add = false*/
+                    /*console.log('add',personal)*/
+                    /*location.reload();*/
                 }
 
             },

@@ -4,23 +4,39 @@
         <div class='box'>
             <div class='item'>
                 <label>Имя
-                    <input type="text" v-model="personalLocalEdit.employee_name">
-                </label>
-            </div>
-                <div class='item'>
-                <label>Возраст
-                    <input type="text" v-model="personalLocalEdit.employee_age">
+                    <input type="text" v-model="personalLocalEdit.name">
                 </label>
             </div>
             <div class='item'>
-                <label>Зарплата
-                    <input type="text"  v-model="personalLocalEdit.employee_salary">
+                <label>Телефон
+                    <input type="text" v-model="personalLocalEdit.phone">
                 </label>
             </div>
-                <div class='item_save'>
+            <div class='item'>
+                <label>Email
+                    <input type="text" v-model="personalLocalEdit.email">
+                </label>
+            </div>
+            <div class='item_text'>
+                <label>Текст
+                    <textarea v-model="personalLocalEdit.text">
+                    </textarea>
+                </label>
+            </div>
+            <div class='item'>
+                <label>Категория
+                    <select v-model="personalLocalEdit.category">
+                    <option>Best</option>
+                    <option>Spam</option>
+                    <option>undefined</option>
+                    </select>
+                </label>
+            </div>
+            <div class='item_save'>
                 <button class = "save" @click='edit'>Сохранить</button>
             </div>
         </div>
+
     </form>
 </template>
 <script>
@@ -35,12 +51,7 @@
         },
         data() {
             return {
-                employee_name: this.personalItemEdit.employee_name,
-                employee_age: '',
-                employee_salary: '',
                 personalLocal:  this.personalItemEdit,
-                name: this.personalItemEdit.employee_age,
-                personalLocal1:  "name",
             };
         },
         computed: {
@@ -61,7 +72,7 @@
             },*/
             edit () {
 
-                /*console.log(this.personalItemEdit)*/
+                console.log('tut edit'+ this.personalItemEdit)
                 this.$emit("edit-personal", this.personalItemEdit)
             }
         }

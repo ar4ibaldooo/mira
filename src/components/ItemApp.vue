@@ -6,14 +6,20 @@
             </td>
             <td>
                 <span v-bind:class="{done: personalItem.completed}">
-                    {{personalItem.employee_name}}
+                    {{personalItem.name}}
                 </span>
             </td>
             <td>
-                {{personalItem.employee_salary}}
+                {{personalItem.phone}}
             </td>
             <td>
-                {{personalItem.employee_age}}
+                {{personalItem.email}}
+            </td>
+            <td>
+                {{personalItem.text}}
+            </td>
+            <td>
+                {{personalItem.category}}
             </td>
             <td>
             <button class="rm" v-on:click="$emit('removePersonalItem', personalItem.id)">

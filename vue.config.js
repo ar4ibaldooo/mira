@@ -10,6 +10,7 @@ const name = 'Training';
 // publicPath: process.env.NODE_ENV === 'production' ? '/vue-typescript-admin-template/' : '/',
 
 module.exports = {
+  publicPath: '/test/dist/',
   devServer: {
     port: devServerPort,
     open: false,
@@ -18,7 +19,7 @@ module.exports = {
       // detail: https://cli.vuejs.org/config/#devserver-proxy
       "/api": {
         // target: `http://dummy.restapiexample.com/api/v1`,
-        target: `http://dummy.restapiexample.com/api`,
+        target: `http://10.66.66.58/test/api`,
         changeOrigin: true, // needed for virtual hosted sites
         ws: true, // proxy websockets
         pathRewrite: {
